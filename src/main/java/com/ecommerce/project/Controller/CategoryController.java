@@ -28,7 +28,7 @@ public class CategoryController {
     @GetMapping("public/category")
     public ResponseEntity<CategoryResponseDTO> getCategories(@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageNumber,
                                                              @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageSize,
-                                                            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+                                                            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_CATEGORY_BY, required = false) String sortBy,
                                                              @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_ORDER, required = false) String sortOrder) {
         return new ResponseEntity<>(categoryService.getAllCategories(pageNumber, pageSize, sortBy, sortOrder), HttpStatusCode.valueOf(200));
     }
