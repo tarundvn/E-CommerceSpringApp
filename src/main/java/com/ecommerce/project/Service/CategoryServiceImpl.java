@@ -29,21 +29,21 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public CategoryResponseDTO getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
 
-        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
-        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
-        Page<Category> categoryPage = categoryRepository.findAll(pageDetails);
-        List<Category> categories = categoryPage.getContent();
+//        Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+//        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
+//        Page<Category> categoryPage = categoryRepository.findAll(pageDetails);
+        List<Category> categories = categoryRepository.findAll();
         if(categories.isEmpty()) {
             throw new APIException("No Category Created till now");
         }
         List<CategoryRequestDTO> categoryResponseDTOS = categories.stream().map(category -> modelMapper.map(category, CategoryRequestDTO.class)).toList();
         CategoryResponseDTO categoryResponseDTO = new CategoryResponseDTO();
         categoryResponseDTO.setContent(categoryResponseDTOS);
-        categoryResponseDTO.setPageNumber(pageNumber);
-        categoryResponseDTO.setPageSize(pageSize);
-        categoryResponseDTO.setTotalElements(categoryPage.getTotalElements());
-        categoryResponseDTO.setTotalPages(categoryPage.getTotalPages());
-        categoryResponseDTO.setLastPage(categoryPage.isLast());
+//        categoryResponseDTO.setPageNumber(pageNumber);
+//        categoryResponseDTO.setPageSize(pageSize);
+//        categoryResponseDTO.setTotalElements(categoryPage.getTotalElements());
+//        categoryResponseDTO.setTotalPages(categoryPage.getTotalPages());
+//        categoryResponseDTO.setLastPage(categoryPage.isLast());
         return categoryResponseDTO;
     }
 
